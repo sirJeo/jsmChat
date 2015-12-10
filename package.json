@@ -1,0 +1,23 @@
+{
+  "name": "jsm-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirJeo/jsmChat.git"
+  },
+  "author": "Serhiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sirJeo/jsmChat/issues"
+  },
+  "homepage": "https://github.com/sirJeo/jsmChat#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "net": "^1.0.2"
+  }
+}
