@@ -1,11 +1,16 @@
 'use strict';
+const colors = ['black', 'red', 'green',
+    'yellow', 'blue', 'magenta', 'cyan',
+    'white', 'gray', 'grey'];
 
 class Clients {
+
     constructor () {
         this.list = {};
+        this.cnt = 0;
     }
 
-    add (client) {
+    create (client) {
         let id = this.generateId();
 
         this.list[id] = {
@@ -14,12 +19,15 @@ class Clients {
             streem: client,
             color: 'white'
         };
-        return id;
+        this.cnt++;
+
+        return this.get(id);
     }
 
     remove (id) {
         if (this.list[id]) {
             delete this.list[id];
+            this.cnt--;
             return true;
         } else {
             return false;
@@ -37,7 +45,7 @@ class Clients {
     generateId () {
         let id;
         do {
-            id = Math.random();
+            id = Math.round(Math.random() * 10000 * (this.cnt + 1));
         } while (this.list[id]);
         return id;
     }
@@ -48,6 +56,45 @@ class Clients {
         }
     }
 
+    processMessage (author, data) {
+        this.global(author, data);
+    }
+
+    system (text, recipient) {
+        try {
+            this._send({type: 'system', text:text}, recipient);
+        } catch (e) {
+            console.log('System message exception:', e);
+        }
+    }
+
+    global (author, text) {
+        this._send({type: 'global', author: author, text:text});
+    }
+
+    personal (recipient, author, text) {
+        try {
+            this._send({type: 'personal', author: author, text:text});
+        } catch (e) {
+            this.system(e, author.id);
+        }
+    }
+
+    _send (msgObj, recipient) {
+        msgObj.author = msgObj.author || {};
+        let msg = [msgObj.type, msgObj.author.name || '', new Date().toString(), msgObj.author.color || '', msgObj.text].join('::');
+
+        if (recipient) {
+            if (!this.list[recipient]) {
+                throw 'Recipient is not exist';
+            }
+            this.list[recipient].streem.write(msg);
+        } else {
+            for(let c in this.list) {
+                this.list[c].streem.write(msg);
+            }
+        }
+    }
 }
 
 module.exports = () => new Clients();
