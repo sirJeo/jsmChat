@@ -1,0 +1,7 @@
+help::::::::
+╔═══════════════════════════════════════════════════════════════╗
+║  Command format: /name <new name>                             ║
+║    - <new name> is mandatory parameter.                       ║
+║ Current user name would be changed with a new one. Everyone   ║
+║ will be notified about your new name.                         ║
+╚═══════════════════════════════════════════════════════════════╝

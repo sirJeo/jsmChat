@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/sirJeo/jsmChat#readme",
   "dependencies": {
-    "colors": "^1.1.2",
-    "net": "^1.0.2"
+    "fs": "0.0.2",
+    "net": "^1.0.2",
+    "stream": "0.0.2"
   }
 }

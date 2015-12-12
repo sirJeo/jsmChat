@@ -9,8 +9,8 @@ npm install
 
 # Start server:
 
-node server -p <port>
+node server [-p <port>]
 
 # Start client
 
-node chat -h <host> -p <port>
+node chat [-h <host>] [-p <port>]

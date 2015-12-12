@@ -1,21 +1,30 @@
 'use strict';
 
-let colors = require('colors'),
-    clientList = require('./clients')();
-
-module.exports = (streem) => {
-    let client = clientList.create(streem);
-    streem.setEncoding('utf-8');
-
-    clientList.system("User " + client.name + " connected");
+let clientList = require('./server/clients')(),
+    messages = require('./server/message')(clientList),
+    introduceTimout = null;
 
 
-    streem.on('data', (data) => {
-        clientList.processMessage(client, data);
+
+module.exports = (connection) => {
+    let client = clientList.create(connection);
+    connection.setEncoding('utf-8');
+
+    /**
+     * Introduce new connected client to all users
+     */
+    messages.introduce(client);
+
+
+    /**
+     * Introduce new connected client to all users
+     */
+    connection.on('data', (data) => {
+        messages.processMessage(client, data);
     });
 
-    streem.on('end', () => {
+    connection.on('end', () => {
         clientList.remove(client.id);
-        clientList.system("User " + client.name + " connected");
+        messages._system("User " + client.name + " connected");
     });
 };

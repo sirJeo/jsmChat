@@ -1,0 +1,13 @@
+help::::::::
+╔═══════════════════════════════════════════════════════════════╗
+║ Allowed commands:                                             ║
+║  /name <new name>      - changes the name of the user         ║
+║  /ping                 - prints back PONG to the user         ║
+║  /list                 - lists all names of the online users  ║
+║  /quit                 - disconnects the user                 ║
+║  /color <color name>   - change user`t text color             ║
+║                          allowed values: black, red, green,   ║
+║                          yellow, blue, magenta, cyan, white,  ║
+║                          gray, grey                           ║
+║  /help                 - call current help                    ║
+╚═══════════════════════════════════════════════════════════════╝
