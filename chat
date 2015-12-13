@@ -1,6 +1,7 @@
+#!/usr/bin/node --harmony_rest_parameters
 'use strict';
 let net = require('net'),
-    config = require('./assets/config/clientConfig.json'),
+    config = require('./assets/config/client.json'),
     args = require('./module/arguments')(),
 
     messages = require('./module/client/message')(config.colors),
@@ -11,6 +12,7 @@ let net = require('net'),
     host = args.host || config.host || 'localhost';
 
 help('intro');
+
 
 let client = net.connect({port: port, host: host}, () => {
     if (config.name) {
@@ -28,10 +30,15 @@ client.pipe(messages).pipe(process.stdout);
  */
 process.stdin.pipe(dataPreprocessor).pipe(client);
 
-
-client.on('end', function() {
-    help('serverTerminated', () => {
-        process.end();
-    });
+/**
+ * Terminate process when server is down
+ */
+client.on('end', () => {
+    console.log('Disconnected from server');
+    process.exit();
 });
 
+client.on('error', () => {
+    console.log('Can not connect to ' + host + ':' + port);
+    process.exit();
+});

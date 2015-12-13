@@ -3,7 +3,6 @@ help::::::::
 ║                      Welcome to jsm Chat                      ║
 ╟───────────────────────────────────────────────────────────────╢
 ║ Allowed commands:                                             ║
-║  /help                 - display commands details             ║
 ║  /name <new name>      - changes the name of the user         ║
 ║  /ping                 - prints back PONG to the user         ║
 ║  /list                 - lists all names of the online users  ║
@@ -12,4 +11,6 @@ help::::::::
 ║                          allowed values: black, red, green,   ║
 ║                          yellow, blue, magenta, cyan, white,  ║
 ║                          gray, grey                           ║
+║  /help                 - display commands details             ║
+║  /to <user> <text>     - send private message to user         ║
 ╚═══════════════════════════════════════════════════════════════╝

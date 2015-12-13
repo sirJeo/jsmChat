@@ -1,10 +1,13 @@
+/**
+ * Module preprocess typed user message,
+ */
 'use strict';
 let stream = require('stream'),
     helpBuilder = require('./help'),
     help = () => {};
 
 const ALLOWED_HELPS = ['/list', '/name'],
-    ALLOWED_COMMANDS = ['/list', '/name', '/ping', '/quit', '/color', '/help'];
+    ALLOWED_COMMANDS = ['/list', '/name', '/ping', '/quit', '/color', '/help', '/to'];
 
 class ClientMessagePreprocessor extends stream.Transform {
 
@@ -14,7 +17,7 @@ class ClientMessagePreprocessor extends stream.Transform {
     }
 
     _transform (data, encoding, callback) {
-        let result = this.processData(data);
+        let result = this.validateData(data);
 
         if (result) {
             this.push(new Buffer(data));
@@ -22,7 +25,12 @@ class ClientMessagePreprocessor extends stream.Transform {
         callback();
     }
 
-    processData (data) {
+    /**
+     * Validation/processing data to send
+     * @param data {string}
+     * @returns {boolean}
+     */
+    validateData (data) {
         if (data.length < 2) {
             return false;
         }
@@ -35,9 +43,13 @@ class ClientMessagePreprocessor extends stream.Transform {
         return true;
     }
 
+    /**
+     * Execute client-side commands.
+     * @param commandString {string}
+     * @returns {boolean}
+     */
     processCommand (commandString) {
-        let self = this,
-            cmdArr = commandString.split(' '),
+        let cmdArr = commandString.split(' '),
             command = cmdArr[0].toLowerCase(),
             params = [];
 

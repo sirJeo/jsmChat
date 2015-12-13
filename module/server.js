@@ -1,8 +1,7 @@
 'use strict';
 
 let clientList = require('./server/clients')(),
-    messages = require('./server/message')(clientList),
-    introduceTimout = null;
+    messages = require('./server/message')(clientList);
 
 
 
@@ -25,6 +24,6 @@ module.exports = (connection) => {
 
     connection.on('end', () => {
         clientList.remove(client.id);
-        messages._system("User " + client.name + " connected");
+        messages._system("User " + client.name + " leave the chatroom.");
     });
 };

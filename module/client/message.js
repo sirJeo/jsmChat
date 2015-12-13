@@ -21,17 +21,31 @@ class ClientMessageManager extends stream.Transform {
         callback();
     }
 
-    applyHelper (val) {
+    /**
+     * Add new message helper to system
+     * @param val
+     */
+    appendHelper (val) {
         if (val.processMsg && typeof val.processMsg === 'function') {
             this.helpers.push(val);
         }
     }
 
-    appendHelpers (msg) {
+    /**
+     * Apply all helpers to message
+     * @param msg {object} received message description object
+     * @returns {object} changed message object
+     */
+    applyHelpers (msg) {
         this.helpers.forEach((helper) => helper.processMsg(msg));
         return msg;
     }
 
+    /**
+     * Process incoming data;
+     * @param data {string} - encoded string
+     * @returns {string} - prepared user message
+     */
     processData (data) {
         let parts = data.toString().split('::'),
             msgObj = {
@@ -42,13 +56,13 @@ class ClientMessageManager extends stream.Transform {
                 text: parts[part_text] + '\n'
             };
 
-        return this.appendHelpers(msgObj).text;
+        return this.applyHelpers(msgObj).text;
     }
 }
 
 module.exports = (colorMap) => {
     let messageManager = new ClientMessageManager();
-    messageManager.applyHelper(colorHelper(colorMap));
+    messageManager.appendHelper(colorHelper(colorMap));
 
     return messageManager;
 };

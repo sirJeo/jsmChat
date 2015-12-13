@@ -1,9 +1,10 @@
+#!/usr/bin/node --harmony_rest_parameters
 'use strict';
 
 let net = require('net'),
     serverFunc = require('./module/server'),
     args = require('./module/arguments')(),
-    config = require('./assets/config/serverConfig.json'),
+    config = require('./assets/config/server.json'),
 
     port = args.port || config.port || 1100,
 

@@ -1,0 +1,9 @@
+help::::::::
+╔═══════════════════════════════════════════════════════════════╗
+║  Command format: /to <user name> <message>                    ║
+║    - <user name> is mandatory parameter. Name of user who you ║
+║                  want to send private message.                ║
+║    - <message> your private message                           ║
+║                                                               ║
+║ Command send private message to particular active chat user.  ║
+╚═══════════════════════════════════════════════════════════════╝

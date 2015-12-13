@@ -10,4 +10,5 @@ help::::::::
 ║                          yellow, blue, magenta, cyan, white,  ║
 ║                          gray, grey                           ║
 ║  /help                 - call current help                    ║
+║  /to <user> <text>     - send private message to user         ║
 ╚═══════════════════════════════════════════════════════════════╝

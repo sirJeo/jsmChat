@@ -1,6 +1,8 @@
+/**
+ * module prints help file
+ */
 'use strict';
 let fs = require('fs');
-
 
 module.exports = (messages) => (name, callback) => {
     callback = callback || function () {};
