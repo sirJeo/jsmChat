@@ -1,7 +1,9 @@
 # jsmChat - simple nodejs chat
 
-Purpose of current chat is learn how streams works. It is free to use. It is easy to installing and use. To install:
-	npm install ---production
+Purpose of current chat is learn how streams works. It is free to use. 
+To install:
+
+	npm install --production
 
 Environment
 ------------
@@ -25,5 +27,5 @@ You can setup port and host with 2 ways:
  - parameters
  - change config files values:
 
-	/assets/config/client.json
+	/assets/config/client.json;
 	/assets/config/server.json
