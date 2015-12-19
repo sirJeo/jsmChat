@@ -1,4 +1,4 @@
-#!/usr/bin/node --harmony_rest_parameters
+#!/usr/local/bin/node --harmony
 'use strict';
 let net = require('net'),
     config = require('./assets/config/client.json'),

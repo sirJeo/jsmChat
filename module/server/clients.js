@@ -3,8 +3,7 @@
 class ClientsManager {
 
     constructor () {
-        this.list = {};
-        this.cnt = 0;
+        this.list = new Map();
     }
 
     /**
@@ -15,13 +14,12 @@ class ClientsManager {
     create (connection) {
         let id = this._generateId();
 
-        this.list[id] = {
+        this.list.set(id, {
             id: id,
             name: id,
             connection: connection,
             color: 'white'
-        };
-        this.cnt++;
+        });
 
         return this.get(id);
     }
@@ -32,9 +30,8 @@ class ClientsManager {
      * @returns {boolean} success indicator
      */
     remove (id) {
-        if (this.list[id]) {
-            delete this.list[id];
-            this.cnt--;
+        if (this.list.has(id)) {
+            this.list.delete(id);
             return true;
         } else {
             return false;
@@ -47,8 +44,8 @@ class ClientsManager {
      * @returns {*} client object
      */
     get (id) {
-        if (this.list[id]) {
-            return this.list[id];
+        if (this.list.has(id)) {
+            return this.list.get(id);
         } else {
             return false;
         }
@@ -60,14 +57,13 @@ class ClientsManager {
      * @returns {*} client object
      */
     find (name) {
-        let client = null;
-        this.forEach((it) => {
-           if (it.name === name) {
-               client = it;
-           }
-        });
+        for(let client of this.list.values()) {
+            if (client.name === name) {
+                return client;
+            }
+        }
 
-        return client;
+        return false;
     }
 
     /**
@@ -78,8 +74,8 @@ class ClientsManager {
     _generateId () {
         let id;
         do {
-            id = Math.round(Math.random() * 10000 * (this.cnt + 1));
-        } while (this.list[id]);
+            id = Math.round(Math.random() * 10000 * (this.list.size + 1));
+        } while (this.list.has(id));
         return id;
     }
 
@@ -88,8 +84,8 @@ class ClientsManager {
      * @param callback {function}
      */
     forEach (callback) {
-        for(let c in this.list) {
-            callback(this.list[c]);
+        for(let client of this.list.values()) {
+            callback(client);
         }
     }
 
@@ -99,9 +95,10 @@ class ClientsManager {
      */
     getUsersList () {
         let names = [];
-        this.forEach(function(it) {
-            names.push(it.name);
-        });
+
+        for(let client of this.list.values()) {
+            names.push(client.name);
+        }
 
         return names.join(', ');
     }

@@ -1,4 +1,5 @@
-#!/usr/bin/node --harmony_rest_parameters
+#!/usr/local/bin/node
+
 'use strict';
 
 let net = require('net'),
