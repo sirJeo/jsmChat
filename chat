@@ -1,23 +1,30 @@
 #!/usr/local/bin/node --harmony
 'use strict';
 let net = require('net'),
-    config = require('./assets/config/client.json'),
+    config = require('./assets/config.json'),
     args = require('./module/arguments')(),
 
     messages = require('./module/client/message')(config.colors),
     dataPreprocessor = require('./module/client/preprocessor')(messages),
     help = require('./module/client/help')(messages),
 
+    createServer = !args.host && !config.host,
     port = args.port || config.port || 1100,
     host = args.host || config.host || 'localhost';
+
+if (createServer) {
+    require('./module/server')(port);
+}
 
 help('intro');
 
 
 let client = net.connect({port: port, host: host}, () => {
     if (config.name) {
-        client.write('/name ' + config.name);
+        client.write('/name ' + config.name + '\n');
     }
+
+    //setTimeout(function(){client.write('/use-client');}, 1);
 });
 
 /**

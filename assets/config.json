@@ -1,7 +1,6 @@
 {
   "name": "Serhiy",
   "port": "7171",
-  "host": "localhost",
   "colors": {
     "background" : "bgBlack",
     "system": "gray",
