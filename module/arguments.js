@@ -20,8 +20,8 @@ module.exports = () => {
             case '-h':
             case '-H':
                 let h = process.argv[i+1];
-                if (height && height.length > 0) {
-                    argumenrs.host = height;
+                if (h && h.length > 0) {
+                    argumenrs.host = h;
                     i++;
                 }
                 break;

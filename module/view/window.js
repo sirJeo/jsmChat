@@ -19,26 +19,15 @@ const BORDER = {
         innerTTop: '┬',
         innerTBottom: '┴',
         innerCross: '┼'
-    },
-    HORIZONTAL = 'horisontal',
-    VERTICAL = 'vertical';
+    };
 
-/*
-class TreeNode {
-    type;
-    left;
-    right;
 
-}
-*/
 
 class Window extends Print {
     constructor (width, height) {
         super();
         this.width = width;
         this.height = height;
-        this.startNodeType = HORIZONTAL;
-
     }
 
     _createBorder () {
@@ -91,8 +80,6 @@ class Window extends Print {
         this.clean();
         this._createBorder();
     }
-
-
 }
 
 module.exports = (width, height) => new Window(width, height);

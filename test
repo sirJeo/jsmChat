@@ -1,0 +1,45 @@
+#!/usr/local/bin/node --harmony_default_parameters
+'use strict';
+
+
+let view = require('./module/view')(),
+    input = require('./module/view/input')(view.getInputWidth());
+
+view.addUser('User 1');
+view.addUser('User 2');
+
+
+setTimeout(() => view.addUser('My new user'), 1000);
+setTimeout(() => view.removeUser('User 1'), 2000);
+setTimeout(() => view.renameUser('User 2', 'Bla bla bla'), 4000);
+
+
+view.addMessage('test');
+setTimeout(() => view.addMessage('Added new message'), 1000);
+setTimeout(() => view.addMessage('Added new messageAdded new messageAdded new messageAdded new messageAdded new messageAdded new messageAdded new message new messageAdded new message new messageAdded new message'), 2000);
+
+
+input.pipe(view);
+
+input.enter = (message) => {
+    console.log(message);
+    process.exit();
+};
+
+
+//input.pipe(process.stdout);
+
+//window.position(2,4);
+//window._write('lalala');
+//out.write('\x1b[?47h');
+//console.log(80/100 * 25);
+//console.log('\x0c');
+//out.write('\x1b[8;24H');
+//out.write('Test here');
+//out.write('\x1b[H');
+//out.write('\x1b[?25l');
+
+//console.log('\x1b[?47h');
+//
+//console.log('\x1b[?47l');
+//console.log('\x1b[?47l');

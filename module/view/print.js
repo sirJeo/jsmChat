@@ -1,7 +1,6 @@
 'use strict';
 
 class Print {
-
     clean () {
         this._print('\x1b[?47h');
     }
